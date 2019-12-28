@@ -1,0 +1,18 @@
+version: "2.1"
+services:
+  localstack:
+    image: localstack/localstack
+    ports:
+      - "4567-4584:4567-4584"
+      - "${PORT_WEB_UI-18080}:${PORT_WEB_UI-18080}"
+    environment:
+      - SERVICES=lambda,apigateway
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=${DEBUG- }
+      - PORT_WEB_UI=${PORT_WEB_UI-18080}
+      - LAMBDA_EXECUTOR=local
+      - KINESIS_ERROR_PROBABILITY=${KINESIS_ERROR_PROBABILITY- }
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "./data/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"

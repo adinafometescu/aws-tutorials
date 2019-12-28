@@ -37,6 +37,7 @@ public class SNSConfig {
                 .withEndpointConfiguration(
                         new AwsClientBuilder.EndpointConfiguration(localStackSqsUrl, awsRegion))
                 .build();
+        amazonSQSAsync.createTopicAsync("MyTopic");
         return amazonSQSAsync;
     }
 }

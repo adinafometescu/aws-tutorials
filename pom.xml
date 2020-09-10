@@ -8,7 +8,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
+        <version>2.3.0.RELEASE</version>
     </parent>
 
     <groupId>com.aws.tutorials</groupId>
@@ -17,9 +17,13 @@
     <modules>
         <module>aws-sns</module>
         <module>aws-api-gateway</module>
+        <module>aws-s3</module>
     </modules>
     <properties>
+        <aws.s3.sdk.version>1.11.858</aws.s3.sdk.version>
         <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
+        <lombok.version>1.18.10</lombok.version>
+        <modelmapper.version>2.3.7</modelmapper.version>
     </properties>
 
     <dependencies>
@@ -36,10 +40,26 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.modelmapper</groupId>
+            <artifactId>modelmapper</artifactId>
+            <version>${modelmapper.version}</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.amazonaws</groupId>
+                <artifactId>aws-java-sdk-s3</artifactId>
+                <version>${aws.s3.sdk.version}</version>
+            </dependency>
             <!-- Spring Cloud -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

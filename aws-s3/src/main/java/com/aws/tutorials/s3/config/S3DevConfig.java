@@ -15,15 +15,10 @@ import org.springframework.context.annotation.Profile;
 @Profile("local")
 public class S3DevConfig {
 
-    @Value("${cloud.aws.region.static:us-east-1}")
-    protected String awsRegion;
-
-    @Value("${localstack.s3.url:http://localhost:4572}")
-    protected String localstackS3Url;
-
     @Bean
-    public AmazonS3 amazonS3() {
-        AmazonS3 s3 = AmazonS3ClientBuilder
+    public AmazonS3 amazonS3(@Value("${cloud.aws.region.static:us-east-1}") String awsRegion,
+                             @Value("${localstack.s3.url:http://localhost:4572}") String localstackS3Url) {
+        return AmazonS3ClientBuilder
                 .standard()
                 .withPathStyleAccessEnabled(true)
                 .withClientConfiguration(new ClientConfiguration()
@@ -32,6 +27,5 @@ public class S3DevConfig {
                 .withEndpointConfiguration(
                         new AwsClientBuilder.EndpointConfiguration(localstackS3Url, awsRegion))
                 .build();
-        return s3;
     }
 }

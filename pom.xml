@@ -20,8 +20,9 @@
         <module>aws-s3</module>
     </modules>
     <properties>
-        <aws.s3.sdk.version>1.11.858</aws.s3.sdk.version>
-        <spring.cloud.version>Greenwich.SR2</spring.cloud.version>
+        <testcontainers.version>1.14.3</testcontainers.version>
+        <aws.sdk.version>1.11.850</aws.sdk.version>
+        <spring.cloud.version>Hoxton.SR8</spring.cloud.version>
         <lombok.version>1.18.10</lombok.version>
         <modelmapper.version>2.3.7</modelmapper.version>
     </properties>
@@ -51,14 +52,39 @@
             <artifactId>modelmapper</artifactId>
             <version>${modelmapper.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>localstack</artifactId>
+                <version>${testcontainers.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
                 <groupId>com.amazonaws</groupId>
-                <artifactId>aws-java-sdk-s3</artifactId>
-                <version>${aws.s3.sdk.version}</version>
+                <artifactId>aws-java-sdk-bom</artifactId>
+                <version>${aws.sdk.version}</version>
             </dependency>
             <!-- Spring Cloud -->
             <dependency>

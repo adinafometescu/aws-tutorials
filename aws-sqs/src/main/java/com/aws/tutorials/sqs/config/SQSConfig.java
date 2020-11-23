@@ -24,6 +24,9 @@ public class SQSConfig {
     @Value("${queue.name}")
     protected String queue;
 
+    @Value("${localstack.url:http://localhost:4566}")
+    protected String localstackUrl;
+
     @Bean
     public QueueMessagingTemplate queueMessagingTemplate() {
         return new QueueMessagingTemplate(amazonSQSAsync());
@@ -36,7 +39,7 @@ public class SQSConfig {
                 .standard()
                 .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials("mock", "mock")))
                 .withEndpointConfiguration(
-                        new AwsClientBuilder.EndpointConfiguration("http://localhost:4566", awsRegion))
+                        new AwsClientBuilder.EndpointConfiguration(localstackUrl, awsRegion))
                 .build();
         amazonSQSAsync.createQueue(queue);
         return amazonSQSAsync;

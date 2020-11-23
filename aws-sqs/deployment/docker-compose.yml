@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  localstack:
+    image: localstack/localstack:latest
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=sqs
+      - LOCALSTACK_HOSTNAME=localhost
+      - DEFAULT_REGION=us-east-1
+      - DEBUG=1
+      - DATA_DIR=/tmp/localstack/data
+    volumes:
+      - "./data/localstack:/tmp/localstack"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    network_mode: host

@@ -1,2 +1,4 @@
 *.iml
 deployment/data/
+/.mvn/wrapper/maven-wrapper.jar
+/aws-sqs/deployment/data/

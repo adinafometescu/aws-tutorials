@@ -1,4 +1,4 @@
-package com.aws.tutorials.sns;
+package com.aws.tutorials.sns.config;
 
 import com.amazonaws.client.builder.AwsClientBuilder;
 import com.amazonaws.services.sns.AmazonSNS;
